@@ -248,33 +248,33 @@
                                 <rect key="frame" x="0.0" y="587" width="375" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip %:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17Y-UQ-Vyn">
-                                        <rect key="frame" x="110.5" y="-11" width="46.5" height="20.5"/>
+                                        <rect key="frame" x="126.5" y="-11" width="46.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="40" translatesAutoresizingMaskIntoConstraints="NO" id="1B5-vg-RCi">
-                                        <rect key="frame" x="171" y="-19" width="190" height="31"/>
+                                        <rect key="frame" x="187" y="-19" width="174" height="31"/>
                                         <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="186" id="UE6-b8-2Oe"/>
+                                            <constraint firstAttribute="width" constant="170" id="UE6-b8-2Oe"/>
                                         </constraints>
                                         <connections>
                                             <action selector="tipSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="HCD-ob-XOL"/>
                                         </connections>
                                     </slider>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uqa-V4-Okp">
-                                        <rect key="frame" x="171" y="25" width="190" height="31"/>
+                                        <rect key="frame" x="187" y="25" width="174" height="31"/>
                                         <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="186" id="tPR-3O-iQ7"/>
+                                            <constraint firstAttribute="width" constant="170" id="tPR-3O-iQ7"/>
                                         </constraints>
                                         <connections>
                                             <action selector="groupSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="DHS-CZ-KnY"/>
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Size:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFG-GH-pVS">
-                                        <rect key="frame" x="68" y="34.5" width="88.5" height="20.5"/>
+                                        <rect key="frame" x="84" y="34.5" width="88.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -317,10 +317,12 @@
                         <outlet property="groupLabelThree" destination="gJT-m7-O8n" id="C7j-C0-7bR"/>
                         <outlet property="groupLabelTwo" destination="imQ-sD-2ET" id="lFf-Di-86q"/>
                         <outlet property="groupSizeLabel" destination="zFG-GH-pVS" id="L3P-29-5Qj"/>
+                        <outlet property="groupSliderUI" destination="Uqa-V4-Okp" id="W2m-ig-Fo6"/>
                         <outlet property="numLabel" destination="hF1-Z9-ppq" id="B6B-Fh-DeD"/>
                         <outlet property="percentageLabelOne" destination="N9g-lm-AWB" id="Nur-Cl-hzU"/>
                         <outlet property="percentageLabelThree" destination="ZqH-BU-Dnh" id="Uyw-ga-oeG"/>
                         <outlet property="percentageLabelTwo" destination="RxL-7c-nhx" id="pwA-h9-JDQ"/>
+                        <outlet property="tipSliderUI" destination="1B5-vg-RCi" id="aUI-jd-3BH"/>
                         <outlet property="tipsLabelOne" destination="gxa-UI-Vg6" id="cFT-wM-5cb"/>
                         <outlet property="tipsLabelThree" destination="VsE-KQ-Imh" id="0gF-Pb-WqS"/>
                         <outlet property="tipsLabelTwo" destination="bYR-XE-v4Y" id="zzy-sQ-eW5"/>

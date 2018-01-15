@@ -12,12 +12,7 @@ import Foundation
 class ViewController: UIViewController, UITextFieldDelegate {
     
     var numOnScreen = "0"
-    var percentageOne = 5.0
-    var percentageTwo = 5.0
-    var percentageThree = 5.0
-    var groupSize = 1
-    
-    
+    @IBOutlet var decimalBtn: UIButton!
     @IBOutlet var numLabel: UILabel!
     @IBOutlet var groupSizeLabel: UILabel!
     
@@ -33,38 +28,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var groupLabelTwo: UILabel!
     @IBOutlet var groupLabelThree: UILabel!
     
+    @IBOutlet var tipSliderUI: UISlider!
+    @IBOutlet var groupSliderUI: UISlider!
+    
     @IBAction func tipSlider(_ sender: UISlider)
     {
-        let value = Double((sender.value)/100)
-        let valueInt = convert2decimals(value: value)
-        percentageOne = Double(valueInt)
-        let tipsOne = percentageMath(amount: (Double(numOnScreen))!, percentage: Double(percentageOne), groupSize: 1)
-        
-        let value2 = Double((sender.value + 5)/100)
-        let valueInt2 = convert2decimals(value: value2)
-        percentageTwo = Double(valueInt2)
-        let tipsTwo = percentageMath(amount: (Double(numOnScreen))!, percentage: Double(percentageTwo), groupSize: 1)
-
-        let value3 = Double((sender.value + 10)/100)
-        let valueInt3 = convert2decimals(value: value3)
-        percentageThree = Double(valueInt3)
-        let tipsThree = percentageMath(amount: (Double(numOnScreen))!, percentage: Double(percentageThree), groupSize: 1)
-    
-        //To print in UI
-        let getPercentage = String("\(lround(value*100))%")
-        percentageLabelOne.text = getPercentage
-        percentageLabelTwo.text = String("\(Int(sender.value + 5))%")
-        percentageLabelThree.text = String("\(Int(sender.value + 10))%")
-        tipsLabelOne.text = String(tipsOne)
-        tipsLabelTwo.text = String(tipsTwo)
-        tipsLabelThree.text = String(tipsThree)
+        calculation()
     }
     
     @IBAction func groupSlider(_ sender: UISlider)
     {
-        groupSizeLabel.text = ("Group Size: \(Int(sender.value))")
-        let groupOne = groupMath(amount: (Double(numOnScreen))!, groupSize: Int(sender.value))
-        groupLabelOne.text = String(groupOne)
+        calculation()
     }
 
     @IBAction func numbersBtnsPressed(_ sender: UIButton)
@@ -73,29 +47,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if numOnScreen == "0" {
                 numLabel.text = String(sender.tag-1)
                 numOnScreen = numLabel.text!
+                calculation()
             } else if numOnScreen == "0." {
                 numLabel.text = "0." + String(sender.tag-1)
                 numOnScreen = numLabel.text!
+                calculation()
             } else {
                 numLabel.text = numLabel.text! + String(sender.tag-1)
                 numOnScreen = numLabel.text!
+                calculation()
             }
         }
     }
     
-    @IBOutlet var decimalBtn: UIButton!
+
     @IBAction func decimalBtnPressed(_ sender: UIButton) {
-        
         if numOnScreen.count <= 7 {
             if numOnScreen == "0.0" {
                 numLabel.text = "0."
                 numOnScreen = "0."
                 decimalBtn.isEnabled = false
+                calculation()
                 
             } else {
                 numLabel.text = numLabel.text! + "."
                 numOnScreen = numLabel.text!
                 sender.isEnabled = false
+                calculation()
             }
         }
     }
@@ -104,26 +82,53 @@ class ViewController: UIViewController, UITextFieldDelegate {
         numOnScreen = "0"
         numLabel.text = numOnScreen
         decimalBtn.isEnabled = true
+        groupSliderUI.value = 1.0
+        tipSliderUI.value = 5.0
         viewDidLoad()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         numLabel.text = numOnScreen
-        percentageLabelOne.text = String("\(Int(10))%")
-        percentageLabelTwo.text = String("\(Int(15))%")
-        percentageLabelThree.text = String("\(Int(20))%")
+        percentageLabelOne.text = String("\(Int(5))%")
+        percentageLabelTwo.text = String("\(Int(10))%")
+        percentageLabelThree.text = String("\(Int(15))%")
         tipsLabelOne.text = "0.00"
         tipsLabelTwo.text = "0.00"
         tipsLabelThree.text = "0.00"
         groupLabelOne.text = "0.00"
         groupLabelTwo.text = "0.00"
         groupLabelThree.text = "0.00"
+        groupSizeLabel.text = "Group Size: 1"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func calculation() {
+        let amount = (numLabel.text! as NSString).doubleValue
+        let percentageOne = Int(tipSliderUI.value)
+        let percentageTwo = Int(tipSliderUI.value + 5)
+        let percentageThree = Int(tipSliderUI.value + 10)
+        let groupSize = Int(groupSliderUI.value)
+        let tipsOne = Double(amount * Double(percentageOne) / 100) / Double(groupSize)
+        let tipsTwo = Double(amount * Double(percentageTwo) / 100) / Double(groupSize)
+        let tipsThree = Double(amount * Double(percentageThree) / 100) / Double(groupSize)
+        let groupOne = Double(amount) / Double(groupSize) + tipsOne
+        let groupTwo = Double(amount) / Double(groupSize) + tipsTwo
+        let groupThree = Double(amount) / Double(groupSize) + tipsThree
+        percentageLabelOne.text = String("\(percentageOne)%")
+        percentageLabelTwo.text = String("\(percentageTwo)%")
+        percentageLabelThree.text = String("\(percentageThree)%")
+        tipsLabelOne.text = String(convert2decimals(value: tipsOne))
+        tipsLabelTwo.text = String(convert2decimals(value: tipsTwo))
+        tipsLabelThree.text = String(convert2decimals(value: tipsThree))
+        groupLabelOne.text = String(convert2decimals(value: groupOne))
+        groupLabelTwo.text = String(convert2decimals(value: groupTwo))
+        groupLabelThree.text = String(convert2decimals(value: groupThree))
+        groupSizeLabel.text = "Group Size: \(Int(groupSliderUI.value))"
     }
 
     func percentageMath(amount: Double, percentage: Double, groupSize: Int) -> Double {
@@ -131,9 +136,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return totalTips
     }
     
-    func groupMath(amount: Double, groupSize: Int) -> Double {
+    func groupMath(amount: Double, groupSize: Int, tips: String) -> Double {
         var eachPersonCost = amount/Double(groupSize)
         eachPersonCost = convert2decimals(value: eachPersonCost)
+        eachPersonCost += (Double(tips)!)
         return eachPersonCost
     }
 
@@ -143,6 +149,5 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let rounded = round(value * multiplier) / multiplier
         return rounded
     }
-
 }
 
